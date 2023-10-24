@@ -1,0 +1,14 @@
+body {
+    background-color: darkslategrey;
+}
+span.azureColor {
+    color: rgb(172, 206, 240);
+    font-family: arial;
+    font-size: 24px;
+  }
+#specificsize{
+    font-size: 30px;
+}
+#specificlink{
+    font: size 30px;
+}

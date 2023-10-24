@@ -1,0 +1,69 @@
+<html>
+<head>
+    <title>Math Game</title>
+</head>
+<body onload="runGame();">
+    <div id="message"></div>
+    <hr size="1">
+    <div id="theQuestion"></div>
+    <table>
+        <tr>
+            <td>Your answer</td>
+            <td><input type="text" id="txtAnswer"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button id="btnSubmit" onClick="checkAnswer();">Submit</button></td>
+        </tr>
+    </table>
+    <div id="finalResult"></div>
+    <label id="lblscore">Score: 0</label>
+    <script>
+        var actualAnswer, number1, number2, correctAnswers = 0, incorrectAnswers = 0, totalQuestions = 10;
+
+        function printQuestion() {
+            number1 = Math.floor(Math.random() * 10);
+            number2 = Math.floor(Math.random() * 10);
+            actualAnswer = number1 + number2;
+            theQuestion.innerHTML = "Question " + (correctAnswers + incorrectAnswers + 1) + ": What is " + number1 + " + " + number2 + "?";
+            finalResult.innerHTML = "";
+        }
+
+        function checkAnswer() {
+            var answer = txtAnswer.value;
+            if (parseInt(answer) === actualAnswer) {
+                finalResult.innerHTML = "Good job!";
+                correctAnswers++;
+            } else {
+                finalResult.innerHTML = "Try Again!";
+                incorrectAnswers++;
+                return;
+            }
+
+            if (correctAnswers + incorrectAnswers < totalQuestions) {
+                var percentage = (correctAnswers / (correctAnswers + incorrectAnswers)) * 100;
+                lblscore.innerHTML = "Correct Answers: " + correctAnswers + ", Incorrect Answers: " + incorrectAnswers + ", Percentage: " + percentage.toFixed(2) + "%";
+                printQuestion();
+            } else {
+                endGame();
+            }
+        }
+
+        function runGame() {
+            message.innerHTML = "<h1>Welcome to our game!!!</h1>";
+            printQuestion();
+        }
+
+        function endGame() {
+            theQuestion.innerHTML = "Game Over";
+            txtAnswer.disabled = true;
+            btnSubmit.disabled = true;
+            var percentage = (correctAnswers / totalQuestions) * 100;
+            lblscore.innerHTML = "Correct Answers: " + correctAnswers + ", Incorrect Answers: " + incorrectAnswers + ", Percentage: " + percentage.toFixed(2) + "%";
+        }
+    </script>
+</body>
+</html>
+
+
+
+
