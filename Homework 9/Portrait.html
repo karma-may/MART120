@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js Sketch</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+    <script>
+        function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+}
+
+function draw(){
+//body
+  triangle(100,300,300,300,190,270);
+  //neck
+    rect(170,230,40,50);
+  //left ear
+  ellipse(100,190,40,50);
+  //right ear
+  //left ear
+  ellipse(300,190,40,50);
+//face
+    ellipse(200,170,200,200);
+//mouth  
+  arc(190,230,90,40,0,PI);
+//nose  
+  triangle(180, 210, 160, 230, 180, 230);
+//right eye
+  ellipse(210,190,40,50);
+  rect(205, 190, 10, 10);
+   strokeWeight(3);
+  point(210, 195);
+//left eye
+  ellipse(160,190,40,50);
+  rect(155, 190, 10, 10);
+   strokeWeight(3);
+  point(160, 195);
+//eyebrow left
+  line(180,160,140,150);
+//eyebrow right
+  line(190,160,240,150);
+//hat
+  line(50,100,350,150);
+  triangle(100,105,300,140,250,20);
+//name
+  textSize(32);
+            text("Karma", 150, 330);
+}
+    </script>
+</body>
+</html>
