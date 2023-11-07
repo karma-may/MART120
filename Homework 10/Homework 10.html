@@ -1,0 +1,110 @@
+<html>
+<head>
+    <title>Portrait</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+    <script>
+         function setup() {
+  createCanvas(400, 400);
+}
+var headx = 200;
+var heady = 170;
+var headDirection = 1;
+var headColor;
+
+var eyeRx = 210;
+var eyeRy = 190;
+var eyeRDirection = 3;
+var eyeRColor;
+
+var eyeLx = 160;
+var eyeLy = 190;
+var eyeLDirection = 5;
+var eyeLColor;
+
+var earRx = 300
+var earRy = 190
+var earRDirection =2;
+
+var nosex = 180;
+var nosey = 210;
+var noseDirection = 1;
+var noseColor
+
+var texts = 32
+
+function draw() {
+  background(220);
+}
+
+function draw(){
+//body
+  triangle(100,300,300,300,190,270);
+  //neck
+    rect(170,230,40,50);
+  //left ear
+  ellipse(100,190,40,50);
+  //right ear
+  ellipse(earRx,earRy,40,50);
+     earRy+=earRDirection;
+  if(earRy >= 200 || earRy <=52)
+  {
+    earRDirection *= -1;
+  }
+//face
+    ellipse(headx,heady,200,200);
+  headx+=headDirection;
+  if(headx >= 418 || headx <=82)
+  {
+    headDirection *= -1;
+  }
+//mouth  
+  arc(190,230,90,40,0,PI);
+//nose  
+  triangle(nosex, nosey, 160, 230, 180, 230);
+   nosex+=noseDirection;
+  if(nosex >= 200 || nosex <=52)
+  {
+    noseDirection *= -1;
+  }
+       nosey+=noseDirection;
+  if(nosey >= 200 || nosey <=52)
+  {
+    noseDirection *= 1;
+  }
+//right eye
+  ellipse(eyeRx,eyeRy,40,50);
+   eyeRx+=eyeRDirection;
+  if(eyeRx >= 418 || eyeRx <=2)
+  {
+    eyeRDirection *= -1;
+  }
+  rect(205, 190, 10, 10);
+   strokeWeight(3);
+  point(210, 195);
+//left eye
+  ellipse(eyeLx,eyeLy,40,50);
+     eyeLy+=eyeLDirection;
+  if(eyeLy >= 200 || eyeLy <=52)
+  {
+    eyeLDirection *= -1;
+  }
+  rect(155, 190, 10, 10);
+   strokeWeight(3);
+  point(160, 195);
+//eyebrow left
+  line(180,160,140,150);
+//eyebrow right
+  line(190,160,240,150);
+//hat
+  line(50,100,350,150);
+  triangle(100,105,300,140,250,20);
+//name
+  textSize(texts);
+            text("Karma", 150, 330);
+
+}
+    </script>
+</body>
+</html>
