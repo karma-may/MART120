@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>body {display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;}</style>
+</head>
+<body>
+  <script src="game.js"></script>
+</body>
+<script>
+let player;
+let obstacles = [];
+let exit;
+let nonMovingObstacle;
+
+function setup() {
+  createCanvas(600, 400);
+  player = new Player();
+  exit = createExit();
+}
+
+function draw() {
+  background(220);
+
+  player.update();
+  player.show();
+
+  for (let obstacle of obstacles) {
+    obstacle.update();
+    obstacle.show();
+  }
+
+  exit.show();
+
+  if (nonMovingObstacle) {
+    nonMovingObstacle.show();
+  }
+}
+
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    player.move(0, -1);
+  } else if (keyCode === DOWN_ARROW) {
+    player.move(0, 1);
+  } else if (keyCode === LEFT_ARROW) {
+    player.move(-1, 0);
+  } else if (keyCode === RIGHT_ARROW) {
+    player.move(1, 0);
+  }
+}
+
+function mousePressed() {
+  nonMovingObstacle = createNonMovingObstacle(mouseX, mouseY);
+}
+
+class Player {
+  constructor() {
+    this.x = width / 2;
+    this.y = height / 2;
+    this.size = 20;
+  }
+
+  move(xDir, yDir) {
+    this.x += xDir * 10;
+    this.y += yDir * 10;
+  }
+
+  show() {
+    fill(0, 0, 255);
+    ellipse(this.x, this.y, this.size);
+  }
+
+  update() {
+    // Check if the player reaches the exit
+    if (this.x > exit.x - exit.size / 2 && this.x < exit.x + exit.size / 2 &&
+        this.y > exit.y - exit.size / 2 && this.y < exit.y + exit.size / 2) {
+      console.log("You won!");
+    }
+  }
+}
+
+class Obstacle {
+  constructor(x, y, size, color) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.color = color;
+    this.xSpeed = random(2, 5) * (random() > 0.5 ? 1 : -1);
+    this.ySpeed = random(2, 5) * (random() > 0.5 ? 1 : -1);
+  }
+
+  show() {
+    fill(this.color);
+    ellipse(this.x, this.y, this.size);
+  }
+
+  update() {
+    this.x += this.xSpeed;
+    this.y += this.ySpeed;
+
+    // Wrap around the canvas if the obstacle goes off-screen
+    if (this.x > width + this.size / 2) {
+      this.x = -this.size / 2;
+    } else if (this.x < -this.size / 2) {
+      this.x = width + this.size / 2;
+    }
+
+    if (this.y > height + this.size / 2) {
+      this.y = -this.size / 2;
+    } else if (this.y < -this.size / 2) {
+      this.y = height + this.size / 2;
+    }
+  }
+}
+
+function createExit() {
+  return {
+    x: width - 30,
+    y: height - 30,
+    size: 20,
+    show: function() {
+      fill(0, 255, 0);
+      rect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+    }
+  };
+}
+
+function createNonMovingObstacle(x, y) {
+  return {
+    x: x,
+    y: y,
+    size: 30,
+    show: function() {
+      fill(255, 0, 0);
+      rect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+    }
+  };
+}
+
+// Initialize obstacles
+obstacles.push(new Obstacle(100, 100, 30, color(255, 0, 0)));
+obstacles.push(new Obstacle(300, 200, 40, color(0, 255, 0)));
+</script>
+</html>
