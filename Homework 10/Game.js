@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  <style>body {display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;}</style>
-</head>
-<body>
-  <script src="game.js"></script>
-</body>
-<script>
-let player;
+<html>
+    <body>
+        let player;
 let obstacles = [];
 let exit;
 let winMessage = false;
@@ -174,5 +165,5 @@ class Obstacle {
 }
 
  
-</script>
-</html>
+    </body>
+/,</html>
